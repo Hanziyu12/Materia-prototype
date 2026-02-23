@@ -68,13 +68,13 @@ Across these first four weeks, my progress has moved from onboarding-level orien
 ---
 
 ## Brief Meeting Update (3-4 minute version)
-"Over my first four weeks, my main goal has been to build a solid foundation while becoming independently useful in daily tasks. I started by working on Arduino fundamentals and documented that in the research notes, mainly to understand how control logic, setup/loop structure, and hardware interaction work in this project context. In parallel, I studied the board and pin/module mapping in the shield prototype document so I could connect hardware wiring to software behavior more accurately.
+"Over my first four weeks, my main goal has been to build a solid foundation while becoming independently useful in daily tasks. I started by working on Arduino fundamentals and documented that in the research notes, mainly to understand how control logic, setup/loop structure, and hardware interaction work in this project context. After that, I studied the board and pin/module mapping in the shield prototype document so I could connect hardware wiring to software behavior more accurately.
 
-After that, I focused on reading the core code files to build a whole-picture view of the system: time setup, shield control logic, and SD logging flow. I reviewed `sketch_SetTime.ino`, `sketch_shields_simple.ino`, `SDtest_for_shields.ino`, and `sketch_shields_SoC.ino` to understand how they relate and where responsibilities are split. This helped me move from reading isolated functions to understanding end-to-end behavior.
+After that, I focused on reading the core code files to build a whole-picture view of the system: time setup, shield control logic, and SD logging flow. I reviewed the key Arduino sketches to understand the full workflow and architecture. This helped me move from reading isolated functions to understanding end-to-end behavior.
 
 On the practical side, I have done real tests repeatedly and I’m now comfortable with test setup, plotting, and reporting workflows. At this stage, I can execute those parts independently, which means I can contribute to routine validation/reporting work without close supervision.
 
-For my current focus, I’m continuing deeper code reading on `sketch_shields_simple.ino`. I believe this is a key file for understanding hardware control behavior at a detailed level. My next step is to complete a more precise mapping between code sections and physical hardware response, so I can strengthen troubleshooting and support optimization work more effectively. Overall, I’m progressing from familiarization to contribution, and I now have a clear technical path for the next phase." 
+For my current focus, I’m continuing deeper code reading on `sketch_shields_simple.ino`. I believe this is a key file for understanding hardware control behavior at a detailed level. My next step is to complete a more precise mapping between code sections and physical hardware response, and see if I can do some optimization work on this." 
 
 ---
 
@@ -85,5 +85,3 @@ For my current focus, I’m continuing deeper code reading on `sketch_shields_si
 4. **Core Code Familiarization:** I reviewed all four key sketches to build an end-to-end understanding of initialization, control logic, and data logging.
 5. **Current Code Focus:** I am still deepening my understanding of `sketch_shields_simple.ino`, especially how code paths translate into hardware control actions.
 6. **Hands-On Testing Capability:** I can now independently run test setup, perform data plotting, and produce structured test reports.
-7. **Current Contribution Level:** I can support routine test execution/reporting now, while continuing to grow in detailed code-level troubleshooting.
-8. **Next-Step Development Goal:** My immediate goal is to complete a code-to-hardware behavior map for `sketch_shields_simple.ino` to improve debugging and optimization readiness.
