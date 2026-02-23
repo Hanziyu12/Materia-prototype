@@ -1,2 +1,3 @@
 # Materia-prototype
-Related Code
+Related Code and Learning documents
+
