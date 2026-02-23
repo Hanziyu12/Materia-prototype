@@ -67,7 +67,7 @@ Across these three weeks, progress has moved from initial orientation to practic
 ---
 
 ## Brief Meeting Update (1-2 minute version)
-"In my first three weeks, I’ve mainly focused on learning and familiarization. I completed Arduino fundamentals research and documented it in the research notes, then studied the board pin/module mapping in the shield prototype file. I also reviewed the four main Arduino code files to build a whole-picture understanding of setup, shield control, and data logging. On the practical side, I’ve completed real test runs and I’m now confident with setup, plotting, and reporting, and can carry out that workflow independently. My next step is to move from familiarization toward deeper troubleshooting and optimization tasks."
+"In my first three weeks, I’ve mainly focused on learning and familiarization. I completed Arduino fundamentals research and documented it in the research notes, then studied the board pin/module mapping in the shield prototype file. I also reviewed the four main Arduino code files to build a whole-picture understanding of setup, shield control, and data logging. On the practical side, I’ve completed real test runs and I’m now confident with setup, plotting, and reporting, and can carry out that workflow independently."
 
 ---
 
