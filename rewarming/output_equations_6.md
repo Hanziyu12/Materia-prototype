@@ -19,7 +19,7 @@ Saved plot: rewarming_curves.png
 
 This curve starts fast and slows down as it approaches the target (decaying approach).
 $$
-T(t) = 4 + 23 \cdot \frac{1 - e^{-5 \cdot \frac{t}{30}}}{1 - e^{-5}}
+\T(t) = 4 + 23 \cdot \frac{1 - e^{-5 \cdot \frac{t}{30}}}{1 - e^{-5}}
 $$
 
 $$
@@ -32,7 +32,7 @@ $$
 
 This curve starts slowly and accelerates as it moves toward the target.
 $$
-T(t) = 4 + 23 \cdot \frac{e^{5 \cdot \frac{t}{30}} - 1}{e^5 - 1}
+\T(t) = 4 + 23 \cdot \frac{e^{5 \cdot \frac{t}{30}} - 1}{e^5 - 1}
 $$
 
 $$
@@ -45,28 +45,28 @@ $$
 
 A steady, constant increase designed to cover the 23°C span exactly in 30 minutes.
 $$
-T(t) = 4 + 0.767t \quad \text{for } 0 \le t \le 30
+\T(t) = 4 + 0.767t \quad \text{for } 0 \le t \le 30
 $$
 
 ### 4. Sigmoid (S-Curve)
 
 Starts slow, accelerates in the middle, and tapers off at the end. Note that $S(x)$ represents the normalized sigmoid function.
 $$
-T(t) = 4 + 23 \cdot \sigma_{\text{norm}}\left(\frac{t}{30}, \alpha=12\right)
+\T(t) = 4 + 23 \cdot \sigma_{\text{norm}}\left(\frac{t}{30}, \alpha=12\right)
 $$
 
 ### 5. Kidney Linear (Fixed Gradient)
 
 A linear ramp at a fixed speed of **1.0°C/min**. It reaches the 27°C goal faster than the 30-minute window (at $t=23$).
 $$
-T(t) = \min(4 + 1.0t, 27)
+\T(t) = \min(4 + 1.0t, 27)
 $$
 
 ### 6. Horse Sperm Linear (Fixed Gradient)
 
 A slower linear ramp at **0.3°C/min**. This is much slower and would not reach 27°C within the 30-minute window.
 $$
-T(t) = \min(4 + 0.3t, 27)
+\T(t) = \min(4 + 0.3t, 27)
 $$
 
 ------
