@@ -19,7 +19,7 @@ Saved plot: rewarming_curves.png
 
 This curve starts fast and slows down as it approaches the target (decaying approach).
 $$
-\T(t) = 4 + 23 \cdot \frac{1 - e^{-5 \cdot \frac{t}{30}}}{1 - e^{-5}}
+.T(t) = 4 + 23 \cdot \frac{1 - e^{-5 \cdot \frac{t}{30}}}{1 - e^{-5}}
 $$
 
 $$
