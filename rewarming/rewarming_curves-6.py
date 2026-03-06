@@ -170,6 +170,7 @@ def plot_curves(output_path: str = "rewarming_curves.png") -> str:
     k_pos = 5.0
     alpha = 12.0
 
+    plot_time_cutoff = 30.0
     curves: list[tuple[str, CurveFn, float, str]] = [
         ("1) Hyperbolic / negative exponential", lambda t, pp: curve_hyperbolic_negative_exponential(t, pp, k_neg=k_neg), 30.0, "#d62728"),
         ("2) Natural positive exponential", lambda t, pp: curve_natural_positive_exponential(t, pp, k_pos=k_pos), 30.0, "#1f77b4"),
@@ -190,16 +191,14 @@ def plot_curves(output_path: str = "rewarming_curves.png") -> str:
         peak = max_rate(fn, p, t_end=t_end)
         ax.plot(t, y, color=color, linewidth=2.2, label=f"{label} | peak={peak:.3f} °C/min")
 
-    ax.set_title("6 Rewarming Curves Comparison")
+
+    ax.set_title("Rewarming Curves Comparison")
     ax.set_xlabel("Time (min)")
     ax.set_ylabel("Temperature (°C)")
     ax.grid(True, alpha=0.3)
     ax.set_ylim(3.5, 27.5)
-    ax.set_xlim(0, max(30.0, p.delta_t / 0.3) * 1.02)
-
-    eq_text = "\n".join([f"{name}: {eq}" for name, eq in equations.items()])
-    ax.text(1.02, 1.0, eq_text, transform=ax.transAxes, va="top", fontsize=8)
-    ax.legend(loc="upper left", bbox_to_anchor=(1.02, 0.52), fontsize=8)
+    ax.set_xlim(0, plot_time_cutoff)
+    ax.legend(loc="upper left", fontsize=8)
     fig.tight_layout()
     fig.savefig(output_path, dpi=160)
     plt.close(fig)
@@ -207,18 +206,18 @@ def plot_curves(output_path: str = "rewarming_curves.png") -> str:
 
 
 def plot_curves_svg_fallback(
-    curves: list[tuple[str, CurveFn, float, str]],
-    equations: dict[str, str],
+    curves: list[tuple[str, CurveFn, str]],
     p: CurveParams,
     output_path: str,
+    plot_time_cutoff: float = 30.0,
 ) -> str:
     """Simple no-dependency SVG plot fallback."""
-    width, height = 1400, 760
-    left, right, top, bottom = 80, 520, 40, 70
+    width, height = 980, 760
+    left, right, top, bottom = 80, 80, 40, 70
     plot_w = width - left - right
     plot_h = height - top - bottom
 
-    x_max = max(30.0, p.delta_t / 0.3) * 1.02
+    x_max = plot_time_cutoff
     y_min, y_max = 3.5, 27.5
 
     def x_px(x: float) -> float:
@@ -249,26 +248,20 @@ def plot_curves_svg_fallback(
 
     # curves
     legend_y = top + 20
-    for label, fn, t_end, color in curves:
-        t, y = sample_curve(fn, p, t_end=t_end, n=500)
+    for label, fn, color in curves:
+        t, y = sample_curve(fn, p, t_end=plot_time_cutoff, n=500)
         pts = " ".join([f"{x_px(tx):.2f},{y_px(ty):.2f}" for tx, ty in zip(t, y)])
         parts.append(f'<polyline points="{pts}" fill="none" stroke="{color}" stroke-width="2.2"/>')
 
-        peak = max_rate(fn, p, t_end=t_end)
-        parts.append(f'<line x1="{left+plot_w+10}" y1="{legend_y}" x2="{left+plot_w+30}" y2="{legend_y}" stroke="{color}" stroke-width="3"/>')
+        peak = max_rate(fn, p, t_end=plot_time_cutoff)
+        # legend in plot area (top-left)
+        x0 = left + 12
+        y0 = legend_y
+        parts.append(f'<line x1="{x0}" y1="{y0}" x2="{x0+20}" y2="{y0}" stroke="{color}" stroke-width="3"/>')
         parts.append(
-            f'<text x="{left+plot_w+36}" y="{legend_y+4}" font-size="11" font-family="Arial">{label} | peak={peak:.3f} °C/min</text>'
+            f'<text x="{x0+26}" y="{y0+4}" font-size="11" font-family="Arial">{label} | peak={peak:.3f} °C/min</text>'
         )
         legend_y += 18
-
-    # equations
-    eq_y = legend_y + 18
-    parts.append(f'<text x="{left+plot_w+10}" y="{eq_y}" font-size="12" font-family="Arial">Equations (numeric):</text>')
-    eq_y += 16
-    for name, eq in equations.items():
-        safe = eq.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
-        parts.append(f'<text x="{left+plot_w+10}" y="{eq_y}" font-size="10" font-family="Arial">{name}: {safe}</text>')
-        eq_y += 14
 
     parts.append(f'<text x="{left+plot_w/2:.1f}" y="{height-12}" font-size="12" text-anchor="middle">Time (min)</text>')
     parts.append(f'<text x="18" y="{top+plot_h/2:.1f}" font-size="12" transform="rotate(-90,18,{top+plot_h/2:.1f})" text-anchor="middle">Temperature (°C)</text>')
@@ -313,3 +306,4 @@ if __name__ == "__main__":
     demo()
     image = plot_curves("rewarming_curves.png")
     print(f"Saved plot: {image}")
+
